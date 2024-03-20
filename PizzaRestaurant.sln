@@ -3,9 +3,49 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{308A9BD9-1881-4BE9-A07E-0BF8E1BF776F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6F5D3B9E-AFDF-4A69-85D6-D940FA717D93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaRestaurant.Domain", "src\PizzaRestaurant.Domain\PizzaRestaurant.Domain.csproj", "{F7412AEE-4886-4A52-8520-54EB3797BE21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaRestaurant.Application", "src\PizzaRestaurant.Application\PizzaRestaurant.Application.csproj", "{3BF5A1CA-4B23-4D29-B825-46119EFA64D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaRestaurant.Infrastructure", "src\PizzaRestaurant.Infrastructure\PizzaRestaurant.Infrastructure.csproj", "{4D75CC51-1354-4D99-A24E-85E1B9078ECA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaRestaurant.Presentation", "src\PizzaRestaurant.Presentation\PizzaRestaurant.Presentation.csproj", "{ADB0AFC3-94E5-4FC2-A528-FBF55D4DE02E}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7412AEE-4886-4A52-8520-54EB3797BE21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7412AEE-4886-4A52-8520-54EB3797BE21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7412AEE-4886-4A52-8520-54EB3797BE21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7412AEE-4886-4A52-8520-54EB3797BE21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BF5A1CA-4B23-4D29-B825-46119EFA64D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF5A1CA-4B23-4D29-B825-46119EFA64D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF5A1CA-4B23-4D29-B825-46119EFA64D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BF5A1CA-4B23-4D29-B825-46119EFA64D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D75CC51-1354-4D99-A24E-85E1B9078ECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D75CC51-1354-4D99-A24E-85E1B9078ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D75CC51-1354-4D99-A24E-85E1B9078ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D75CC51-1354-4D99-A24E-85E1B9078ECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB0AFC3-94E5-4FC2-A528-FBF55D4DE02E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB0AFC3-94E5-4FC2-A528-FBF55D4DE02E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB0AFC3-94E5-4FC2-A528-FBF55D4DE02E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB0AFC3-94E5-4FC2-A528-FBF55D4DE02E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F7412AEE-4886-4A52-8520-54EB3797BE21} = {308A9BD9-1881-4BE9-A07E-0BF8E1BF776F}
+		{3BF5A1CA-4B23-4D29-B825-46119EFA64D1} = {308A9BD9-1881-4BE9-A07E-0BF8E1BF776F}
+		{4D75CC51-1354-4D99-A24E-85E1B9078ECA} = {308A9BD9-1881-4BE9-A07E-0BF8E1BF776F}
+		{ADB0AFC3-94E5-4FC2-A528-FBF55D4DE02E} = {308A9BD9-1881-4BE9-A07E-0BF8E1BF776F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F220E76-B178-4732-BA04-DC74DE838C1B}
