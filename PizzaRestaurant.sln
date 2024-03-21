@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{308A9BD9-1881-4BE9-A07E-0BF8E1BF776F}"
+	ProjectSection(SolutionItems) = preProject
+		Docker-compose.yaml = Docker-compose.yaml
+		sapassword.env.local = sapassword.env.local
+		sqlconfig.env.local = sqlconfig.env.local
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6F5D3B9E-AFDF-4A69-85D6-D940FA717D93}"
 EndProject

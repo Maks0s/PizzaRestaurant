@@ -1,0 +1,16 @@
+version: '3.9'
+
+volumes:
+  PizzaRestourantMsSqlDbStorage:
+  
+services:
+  MsSqlServer:
+    container_name: "PizzaRestourantMsSqlDb"
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    env_file:
+      - sqlconfig.env.local
+      - sapassword.env.local
+    ports:
+      - "1439:1433"
+    volumes:
+      - PizzaRestourantMsSqlDbStorage:/var/opt/mssql/

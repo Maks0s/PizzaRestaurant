@@ -1,3 +1,4 @@
+using PizzaRestaurant.Infrastructure;
 using PizzaRestaurant.Presentation;
 using Serilog;
 
@@ -24,6 +25,7 @@ try
             .ReadFrom.Configuration(jsonConfig);
     });
 
+    builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddPresentation();
 
     var app = builder.Build();
