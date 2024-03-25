@@ -8,8 +8,8 @@ services:
     container_name: "PizzaRestourantMsSqlDb"
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     env_file:
-      - sqlconfig.env.local
-      - sapassword.env.local
+      - sqlconfig.env
+      - sapassword.env
     ports:
       - "1439:1433"
     volumes:
