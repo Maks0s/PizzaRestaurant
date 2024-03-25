@@ -1,3 +1,4 @@
+using PizzaRestaurant.Application;
 using PizzaRestaurant.Infrastructure;
 using PizzaRestaurant.Presentation;
 using Serilog;
@@ -25,6 +26,7 @@ try
             .ReadFrom.Configuration(jsonConfig);
     });
 
+    builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddPresentation();
 
@@ -36,6 +38,7 @@ try
 
     if (app.Environment.IsDevelopment())
     {
+        app.ApplyDbMigrations();
         app.UseSwagger();
         app.UseSwaggerUI();
     }

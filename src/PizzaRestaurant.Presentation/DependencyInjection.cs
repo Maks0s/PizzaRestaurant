@@ -1,4 +1,8 @@
-﻿namespace PizzaRestaurant.Presentation
+﻿using Microsoft.EntityFrameworkCore;
+using PizzaRestaurant.Infrastructure.Persistence;
+using PizzaRestaurant.Presentation.Common.Mappers;
+
+namespace PizzaRestaurant.Presentation
 {
     public static class DependencyInjection
     {
@@ -7,8 +11,26 @@
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+            services.AddMappers();
 
             return services;
+        }
+
+        private static IServiceCollection AddMappers(this IServiceCollection services)
+        {
+            services.AddTransient<PizzaMapper>();
+
+            return services;
+        }
+
+        public static void ApplyDbMigrations(this IApplicationBuilder app)
+        {
+            using IServiceScope scope = app.ApplicationServices.CreateScope();
+
+            using PizzaDbContext dbContext =
+                scope.ServiceProvider.GetRequiredService<PizzaDbContext>();
+
+            dbContext.Database.Migrate();
         }
     }
 }
