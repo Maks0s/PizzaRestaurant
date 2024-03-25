@@ -21,11 +21,9 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.TestUtils
                 .RuleFor(p => p.Price, f => f.Finance.Amount(10, 499, 2));
 
         public BaseApiIntegrationTests(
-                ApiFactory apiFactory,
-                ITestOutputHelper testOutputHelper
+                ApiFactory apiFactory
             )
         {
-            apiFactory.testOutputHelper = testOutputHelper;
             _asyncDbReseter = apiFactory.ResetDbAsync;
             _httpClient = apiFactory.HttpClient;
         }

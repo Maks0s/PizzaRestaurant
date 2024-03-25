@@ -1,19 +1,16 @@
-﻿using Meziantou.Extensions.Logging.Xunit;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 using PizzaRestaurant.Infrastructure.Persistence;
 using PizzaRestaurant.Infrastructure.Persistence.Common.DbSchemas;
 using PizzaRestaurant.Presentation.Common.Markers;
 using Respawn;
 using System.Data.Common;
 using Testcontainers.MsSql;
-using Xunit.Abstractions;
 
 namespace PizzaRestaurant.IntegrationTests.Presentation.TestUtils
 {
@@ -28,7 +25,6 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.TestUtils
         private Respawner _respawner = default!;
 
         public HttpClient HttpClient { get; private set; } = default!;
-        public ITestOutputHelper testOutputHelper { get; set; } = default!;
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -50,14 +46,6 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.TestUtils
                             }
                         );
                 });
-            });
-
-            builder.ConfigureLogging(loggingBuilder =>
-            {
-                loggingBuilder.ClearProviders();
-                loggingBuilder.SetMinimumLevel(LogLevel.Information);
-
-                loggingBuilder.Services.AddSingleton<ILoggerProvider>(new XUnitLoggerProvider(testOutputHelper));
             });
         }
 

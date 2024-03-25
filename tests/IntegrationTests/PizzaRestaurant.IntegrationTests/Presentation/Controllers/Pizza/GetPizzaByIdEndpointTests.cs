@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using Microsoft.AspNetCore.Mvc;
+using PizzaRestaurant.Application.Common.AppErrors;
 using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUtils;
 using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
 using PizzaRestaurant.Presentation.Common.DTO;
@@ -12,10 +14,9 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
     public class GetPizzaByIdEndpointTests : BaseApiIntegrationTests
     {
         public GetPizzaByIdEndpointTests(
-                ApiFactory apiFactory,
-                ITestOutputHelper testOutputHelper
+                ApiFactory apiFactory
             )
-            : base(apiFactory, testOutputHelper)
+            : base(apiFactory)
         {
         }
 
@@ -35,7 +36,8 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
 
             //Act
             var getResult =
-                await _httpClient.GetAsync($"/pizza/{addedPizza!.Id}");
+                await _httpClient
+                    .GetAsync($"/pizza/{addedPizza!.Id}");
             var pizzaResponse =
                 await getResult.Content
                     .ReadFromJsonAsync<PizzaResponse>();
@@ -45,6 +47,28 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
 
             getResult.StatusCode.Should().Be(HttpStatusCode.OK);
             pizzaResponse!.AssertPizzaResponse(pizzaToAdd);
+        }
+
+        [Fact]
+        public async Task GetPizzaById_WithNonexistentId_ShouldReturnNotFoundError()
+        {
+            //Arrange
+            var nonexistentId = Guid.NewGuid();
+            var expectedError = Errors.Pizzas.NotFound(nonexistentId);
+
+            //Act
+            var getResult =
+                await _httpClient
+                    .GetAsync($"/pizza/{nonexistentId}");
+            var error =
+                await getResult.Content
+                    .ReadFromJsonAsync<ProblemDetails>();
+
+            //Assert
+            using var _ = new AssertionScope();
+
+            getResult.StatusCode.Should().Be(HttpStatusCode.NotFound);
+            error!.AssertError(expectedError);
         }
     }
 }

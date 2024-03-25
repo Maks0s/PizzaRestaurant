@@ -1,5 +1,8 @@
-﻿using FluentAssertions;
+﻿using ErrorOr;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using PizzaRestaurant.Presentation.Common.DTO;
+using System.Net;
 
 namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUtils
 {
@@ -14,6 +17,16 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUt
             pizzaResponse.CrustType.Should().Be(requestedPizza.CrustType);
             pizzaResponse.Ingredients.Should().Be(requestedPizza.Ingredients);
             pizzaResponse.Price.Should().Be(requestedPizza.Price);
+        }
+
+        public static void AssertError(
+                this ProblemDetails problemDetails,
+                Error expectedError
+            )
+        {
+            problemDetails.Status.Should().Be(expectedError.NumericType);
+            problemDetails.Title.Should().Be(expectedError.Code);
+            problemDetails.Detail.Should().Be(expectedError.Description);
         }
     }
 }
