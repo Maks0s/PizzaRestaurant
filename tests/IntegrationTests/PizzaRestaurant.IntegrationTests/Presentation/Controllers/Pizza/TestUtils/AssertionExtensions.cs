@@ -1,5 +1,6 @@
 ﻿using ErrorOr;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
 using PizzaRestaurant.Presentation.Common.DTO;
 using System.Net;
@@ -8,15 +9,23 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUt
 {
     public static class AssertionExtensions
     {
-        public static void AssertPizzaResponse(
-                this PizzaResponse pizzaResponse,
-                PizzaRequest requestedPizza
+        public static void AssertStatusCode(
+                this HttpStatusCode responseStatusCode,
+                HttpStatusCode expectedStatusCode
             )
         {
-            pizzaResponse.Name.Should().Be(requestedPizza.Name);
-            pizzaResponse.CrustType.Should().Be(requestedPizza.CrustType);
-            pizzaResponse.Ingredients.Should().Be(requestedPizza.Ingredients);
-            pizzaResponse.Price.Should().Be(requestedPizza.Price);
+            responseStatusCode.Should().Be(expectedStatusCode);
+        }
+
+        public static void AssertPizzaResponse(
+                this PizzaResponse pizzaResponse,
+                PizzaRequest expectedPizza
+            )
+        {
+            pizzaResponse.Name.Should().Be(expectedPizza.Name);
+            pizzaResponse.CrustType.Should().Be(expectedPizza.CrustType);
+            pizzaResponse.Ingredients.Should().Be(expectedPizza.Ingredients);
+            pizzaResponse.Price.Should().Be(expectedPizza.Price);
         }
 
         public static void AssertError(
