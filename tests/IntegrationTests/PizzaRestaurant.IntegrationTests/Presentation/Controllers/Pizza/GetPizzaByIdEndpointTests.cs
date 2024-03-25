@@ -7,7 +7,6 @@ using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
 using PizzaRestaurant.Presentation.Common.DTO;
 using System.Net;
 using System.Net.Http.Json;
-using Xunit.Abstractions;
 
 namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
 {
@@ -45,7 +44,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
             //Assert
             using var _ = new AssertionScope();
 
-            getResult.StatusCode.Should().Be(HttpStatusCode.OK);
+            getResult.StatusCode.AssertStatusCode(HttpStatusCode.OK);
             pizzaResponse!.AssertPizzaResponse(pizzaToAdd);
         }
 
@@ -67,7 +66,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
             //Assert
             using var _ = new AssertionScope();
 
-            getResult.StatusCode.Should().Be(HttpStatusCode.NotFound);
+            getResult.StatusCode.AssertStatusCode(HttpStatusCode.NotFound);
             error!.AssertError(expectedError);
         }
     }
