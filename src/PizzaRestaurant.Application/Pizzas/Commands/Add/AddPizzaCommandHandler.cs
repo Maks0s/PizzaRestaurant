@@ -4,7 +4,7 @@ using PizzaRestaurant.Application.Common.Interfaces.CQRS;
 using PizzaRestaurant.Application.Common.Interfaces.Persistence;
 using PizzaRestaurant.Domain.Entities;
 
-namespace PizzaRestaurant.Application.Pizzas.Commands
+namespace PizzaRestaurant.Application.Pizzas.Commands.Add
 {
     public class AddPizzaCommandHandler
         : ICommandHandler<AddPizzaCommand, Pizza?>

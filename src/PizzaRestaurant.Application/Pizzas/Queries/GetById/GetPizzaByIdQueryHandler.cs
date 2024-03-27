@@ -4,7 +4,7 @@ using PizzaRestaurant.Application.Common.Interfaces.CQRS;
 using PizzaRestaurant.Application.Common.Interfaces.Persistence;
 using PizzaRestaurant.Domain.Entities;
 
-namespace PizzaRestaurant.Application.Pizzas.Queries
+namespace PizzaRestaurant.Application.Pizzas.Queries.GetById
 {
     public class GetPizzaByIdQueryHandler
         : IQueryHandler<GetPizzaByIdQuery, Pizza?>
@@ -17,7 +17,7 @@ namespace PizzaRestaurant.Application.Pizzas.Queries
         }
 
         public async Task<ErrorOr<Pizza?>> Handle(
-                GetPizzaByIdQuery query, 
+                GetPizzaByIdQuery query,
                 CancellationToken cancellationToken
             )
         {
@@ -27,7 +27,7 @@ namespace PizzaRestaurant.Application.Pizzas.Queries
                 await _pizzaRepository
                     .GetPizzaAsync(pizzaId);
 
-            if(pizza is null)
+            if (pizza is null)
             {
                 return Errors.Pizzas.NotFound(pizzaId);
             }

@@ -13,6 +13,13 @@ namespace PizzaRestaurant.Application.Common.AppErrors
                         "Your data has not been added to the server",
                         "Something happened while adding your data to the server. Please try again later."
                     );
+
+            public static Error NotReceived() =>
+                Error.Custom(
+                        (int)HttpStatusCode.InternalServerError,
+                        "Requested data was not received",
+                        "Something happened when requesting data from the server. Please try again later."
+                    );
         }
     }
 }

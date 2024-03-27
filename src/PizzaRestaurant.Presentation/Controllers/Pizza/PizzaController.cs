@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PizzaRestaurant.Application.Pizzas.Queries;
+using PizzaRestaurant.Application.Pizzas.Queries.GetAll;
+using PizzaRestaurant.Application.Pizzas.Queries.GetById;
 using PizzaRestaurant.Presentation.Common.DTO;
 using PizzaRestaurant.Presentation.Common.Mappers;
 using PizzaRestaurant.Presentation.Controllers.Common;
@@ -49,6 +50,23 @@ namespace PizzaRestaurant.Presentation.Controllers.Pizza
 
             return queryResult.Match<ActionResult<PizzaResponse>>(
                     received => _mapper.MapToPizzaResponse(received),
+                    errors => Problem(errors)
+                );
+        }
+
+        [HttpGet]
+        [Route("/all")]
+        public async Task<ActionResult<ICollection<PizzaResponse>>> GetAllPizzas()
+        {
+            var query = new GetAllPizzasQuery();
+
+            var queryResult = 
+                await _mediator.Send(query);
+
+            return queryResult.Match(
+                    received => Ok(
+                            _mapper.MapToCollectionOfPizzaResponses(received)
+                        ),
                     errors => Problem(errors)
                 );
         }

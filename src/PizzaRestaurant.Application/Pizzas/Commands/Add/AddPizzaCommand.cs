@@ -1,7 +1,7 @@
 ﻿using PizzaRestaurant.Application.Common.Interfaces.CQRS;
 using PizzaRestaurant.Domain.Entities;
 
-namespace PizzaRestaurant.Application.Pizzas.Commands
+namespace PizzaRestaurant.Application.Pizzas.Commands.Add
 {
     public record AddPizzaCommand(
             string Name,
