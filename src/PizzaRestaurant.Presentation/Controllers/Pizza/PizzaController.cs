@@ -5,6 +5,7 @@ using PizzaRestaurant.Application.Pizzas.Queries.GetById;
 using PizzaRestaurant.Presentation.Common.DTO;
 using PizzaRestaurant.Presentation.Common.Mappers;
 using PizzaRestaurant.Presentation.Controllers.Common;
+using System.Text.Json.Serialization;
 
 namespace PizzaRestaurant.Presentation.Controllers.Pizza
 {
@@ -66,6 +67,24 @@ namespace PizzaRestaurant.Presentation.Controllers.Pizza
             return queryResult.Match(
                     received => Ok(
                             _mapper.MapToCollectionOfPizzaResponses(received)
+                        ),
+                    errors => Problem(errors)
+                );
+        }
+
+        [HttpPut]
+        [Route("update/{id:guid}")]
+        public async Task<ActionResult<PizzaResponse>> UpdatePizza(Guid id, [FromBody] PizzaRequest pizzaToUpdate)
+        {
+            var upc = _mapper.MapToUpdatePizzaCommand(pizzaToUpdate);
+            upc.PizzaId = id;
+
+            var updateResult =
+                await _mediator.Send(upc);
+
+            return updateResult.Match(
+                    updated => Ok(
+                            _mapper.MapToPizzaResponse(updated)
                         ),
                     errors => Problem(errors)
                 );
