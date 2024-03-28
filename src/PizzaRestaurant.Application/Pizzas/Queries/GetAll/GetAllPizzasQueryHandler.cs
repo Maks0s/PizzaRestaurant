@@ -30,7 +30,7 @@ namespace PizzaRestaurant.Application.Pizzas.Queries.GetAll
                 return Errors.ServerDataManipulation.NotReceived();
             }
 
-            return allPizzas;
+            return ErrorOrFactory.From(allPizzas);
         }
     }
 }

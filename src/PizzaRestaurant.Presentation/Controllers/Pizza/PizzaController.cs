@@ -55,7 +55,7 @@ namespace PizzaRestaurant.Presentation.Controllers.Pizza
         }
 
         [HttpGet]
-        [Route("/all")]
+        [Route("all")]
         public async Task<ActionResult<ICollection<PizzaResponse>>> GetAllPizzas()
         {
             var query = new GetAllPizzasQuery();
