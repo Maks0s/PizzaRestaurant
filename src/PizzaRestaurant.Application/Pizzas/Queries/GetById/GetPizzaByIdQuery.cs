@@ -3,6 +3,6 @@ using PizzaRestaurant.Domain.Entities;
 
 namespace PizzaRestaurant.Application.Pizzas.Queries.GetById
 {
-    public record GetPizzaByIdQuery(string Id)
+    public record GetPizzaByIdQuery(Guid Id)
         : IQuery<Pizza?>;
 }

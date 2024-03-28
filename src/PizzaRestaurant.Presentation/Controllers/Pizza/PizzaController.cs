@@ -43,7 +43,7 @@ namespace PizzaRestaurant.Presentation.Controllers.Pizza
         [Route("{id:guid}")]
         public async Task<ActionResult<PizzaResponse>> GetPizzaById(Guid id)
         {
-            var query = new GetPizzaByIdQuery(id.ToString());
+            var query = new GetPizzaByIdQuery(id);
 
             var queryResult =
                 await _mediator.Send(query);

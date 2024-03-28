@@ -21,7 +21,7 @@ namespace PizzaRestaurant.Application.Pizzas.Queries.GetById
                 CancellationToken cancellationToken
             )
         {
-            var pizzaId = Guid.Parse(query.Id);
+            var pizzaId = query.Id;
 
             var pizza =
                 await _pizzaRepository
