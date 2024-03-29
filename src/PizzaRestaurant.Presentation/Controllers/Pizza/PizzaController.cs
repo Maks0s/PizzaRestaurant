@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PizzaRestaurant.Application.Pizzas.Commands.Delete;
 using PizzaRestaurant.Application.Pizzas.Queries.GetAll;
 using PizzaRestaurant.Application.Pizzas.Queries.GetById;
 using PizzaRestaurant.Presentation.Common.DTO;
@@ -76,16 +77,31 @@ namespace PizzaRestaurant.Presentation.Controllers.Pizza
         [Route("update/{id:guid}")]
         public async Task<ActionResult<PizzaResponse>> UpdatePizza(Guid id, [FromBody] PizzaRequest pizzaToUpdate)
         {
-            var upc = _mapper.MapToUpdatePizzaCommand(pizzaToUpdate);
-            upc.PizzaId = id;
+            var command = _mapper.MapToUpdatePizzaCommand(pizzaToUpdate);
+            command.PizzaId = id;
 
             var updateResult =
-                await _mediator.Send(upc);
+                await _mediator.Send(command);
 
             return updateResult.Match(
                     updated => Ok(
                             _mapper.MapToPizzaResponse(updated)
                         ),
+                    errors => Problem(errors)
+                );
+        }
+
+        [HttpDelete]
+        [Route("delete/{id:guid}")]
+        public async Task<ActionResult> DeletePizza(Guid id)
+        {
+            var command = new DeletePizzaCommand(id);
+
+            var deleteResult =
+                await _mediator.Send(command);
+
+            return deleteResult.Match(
+                    success => NoContent(),
                     errors => Problem(errors)
                 );
         }
