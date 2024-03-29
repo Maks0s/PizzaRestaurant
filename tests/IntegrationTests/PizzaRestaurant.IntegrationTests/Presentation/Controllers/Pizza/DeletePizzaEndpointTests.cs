@@ -1,5 +1,6 @@
 ﻿using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
+using PizzaRestaurant.Application.Common.AppErrors;
 using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUtils;
 using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
 using PizzaRestaurant.Presentation.Common.DTO;
@@ -8,63 +9,63 @@ using System.Net.Http.Json;
 
 namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
 {
-    public class UpdatePizzaEndpointTests
+    public class DeletePizzaEndpointTests
         : BaseApiIntegrationTests
     {
-        public UpdatePizzaEndpointTests(ApiFactory apiFactory) : base(apiFactory)
+        public DeletePizzaEndpointTests(ApiFactory apiFactory)
+            : base(apiFactory)
         {
         }
 
         [Fact]
-        public async Task UpdatePizza_WithValidDataAndExistingId_ShouldReturnUpdatedPizza()
+        public async Task DeletePizza_WithExistingId_ShouldDeletePizza()
         {
             //Arrange
             var pizzaToAdd = _pizzaGenerator.Generate();
             var addResult =
                 await _httpClient
                     .PostAsJsonAsync("/pizza/add", pizzaToAdd);
-            var addedPizza =
+
+            var pizzaToDelete =
                 await addResult.Content
                     .ReadFromJsonAsync<PizzaResponse>();
 
             //Act
-            var pizzaToUpdate = _pizzaGenerator.Generate();
-            var updateResult =
+            var deleteResult =
                 await _httpClient
-                    .PutAsJsonAsync($"/pizza/update/{addedPizza!.Id}", pizzaToUpdate);
-            var updatedPizza =
-                await updateResult.Content
-                    .ReadFromJsonAsync<PizzaResponse>();
+                    .DeleteAsync($"/pizza/delete/{pizzaToDelete!.Id}");
+
+            var getResult =
+                await _httpClient
+                    .GetAsync($"/pizza/{pizzaToDelete.Id}");
 
             //Assert
             using var _ = new AssertionScope();
 
-            updateResult.StatusCode.AssertStatusCode(HttpStatusCode.OK);
-            updatedPizza!.AssertPizzaResponse(pizzaToUpdate);
+            deleteResult.StatusCode.AssertStatusCode(HttpStatusCode.NoContent);
+            getResult.StatusCode.AssertStatusCode(HttpStatusCode.NotFound);
         }
 
         [Fact]
-        public async Task UpdatePizza_WithNonexistingId_ShouldReturnNotFoundError()
+        public async Task DeletePizza_WithNonexistingId_ShouldReturnNotFound()
         {
             //Arrange
-            var pizzaToUpdate = _pizzaGenerator.Generate();
-            var nonexistentId = Guid.NewGuid();
-            var expectedError = Application.Common.AppErrors.Errors.Pizzas.NotFound(nonexistentId);
+            var nonexistingId = Guid.NewGuid();
+            var expectedError = Errors.Pizzas.NotFound(nonexistingId);
 
             //Act
-            var updateResult =
+            var deleteResult =
                 await _httpClient
-                    .PutAsJsonAsync($"/pizza/update/{nonexistentId}", pizzaToUpdate);
+                    .DeleteAsync($"/pizza/delete/{nonexistingId}");
             var problemDetails =
-                await updateResult.Content
+                await deleteResult.Content
                     .ReadFromJsonAsync<ProblemDetails>();
 
             //Assert
             using var _ = new AssertionScope();
 
-            updateResult.StatusCode.AssertStatusCode(HttpStatusCode.NotFound);
+            deleteResult.StatusCode.AssertStatusCode(HttpStatusCode.NotFound);
             problemDetails!.AssertError(expectedError);
-
         }
     }
 }

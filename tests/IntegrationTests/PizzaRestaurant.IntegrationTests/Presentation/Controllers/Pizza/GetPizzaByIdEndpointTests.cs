@@ -20,7 +20,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
         }
 
         [Fact]
-        public async Task GetPizzaById_WithAddedPizza_ShouldReturnExistingPizza()
+        public async Task GetPizzaById_WithexistingId_ShouldReturnExistingPizza()
         {
             //Arrange
             var pizzaToAdd = _pizzaGenerator.Generate();
@@ -49,7 +49,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
         }
 
         [Fact]
-        public async Task GetPizzaById_WithNonexistentId_ShouldReturnNotFoundError()
+        public async Task GetPizzaById_WithNonexistingId_ShouldReturnNotFoundError()
         {
             //Arrange
             var nonexistentId = Guid.NewGuid();
