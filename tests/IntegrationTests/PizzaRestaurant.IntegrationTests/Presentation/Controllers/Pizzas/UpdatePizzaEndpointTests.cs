@@ -1,12 +1,13 @@
 ﻿using FluentAssertions.Execution;
+using PizzaRestaurant.Application.Common.AppErrors;
 using Microsoft.AspNetCore.Mvc;
-using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUtils;
+using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils;
 using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
 using PizzaRestaurant.Presentation.Common.DTO;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
+namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
 {
     public class UpdatePizzaEndpointTests
         : BaseApiIntegrationTests
@@ -19,19 +20,13 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
         public async Task UpdatePizza_WithValidDataAndExistingId_ShouldReturnUpdatedPizza()
         {
             //Arrange
-            var pizzaToAdd = _pizzaGenerator.Generate();
-            var addResult =
-                await _httpClient
-                    .PostAsJsonAsync("/pizza/add", pizzaToAdd);
-            var addedPizza =
-                await addResult.Content
-                    .ReadFromJsonAsync<PizzaResponse>();
+            var pizzaToUpdate = _pizzaGenerator.SeededPizzas[0];
+            var pizzaUpdateRequest = _pizzaGenerator.GeneratePizzaRequest();
 
             //Act
-            var pizzaToUpdate = _pizzaGenerator.Generate();
             var updateResult =
                 await _httpClient
-                    .PutAsJsonAsync($"/pizza/update/{addedPizza!.Id}", pizzaToUpdate);
+                    .PutAsJsonAsync($"/pizza/update/{pizzaToUpdate.Id}", pizzaUpdateRequest);
             var updatedPizza =
                 await updateResult.Content
                     .ReadFromJsonAsync<PizzaResponse>();
@@ -40,21 +35,21 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
             using var _ = new AssertionScope();
 
             updateResult.StatusCode.AssertStatusCode(HttpStatusCode.OK);
-            updatedPizza!.AssertPizzaResponse(pizzaToUpdate);
+            updatedPizza!.AssertPizzaResponse(pizzaUpdateRequest);
         }
 
         [Fact]
         public async Task UpdatePizza_WithNonexistingId_ShouldReturnNotFoundError()
         {
             //Arrange
-            var pizzaToUpdate = _pizzaGenerator.Generate();
+            var pizzaUpdateRequest = _pizzaGenerator.GeneratePizzaRequest();
             var nonexistentId = Guid.NewGuid();
-            var expectedError = Application.Common.AppErrors.Errors.Pizzas.NotFound(nonexistentId);
+            var expectedError = Errors.Pizzas.NotFound(nonexistentId);
 
             //Act
             var updateResult =
                 await _httpClient
-                    .PutAsJsonAsync($"/pizza/update/{nonexistentId}", pizzaToUpdate);
+                    .PutAsJsonAsync($"/pizza/update/{nonexistentId}", pizzaUpdateRequest);
             var problemDetails =
                 await updateResult.Content
                     .ReadFromJsonAsync<ProblemDetails>();
@@ -64,7 +59,6 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
 
             updateResult.StatusCode.AssertStatusCode(HttpStatusCode.NotFound);
             problemDetails!.AssertError(expectedError);
-
         }
     }
 }

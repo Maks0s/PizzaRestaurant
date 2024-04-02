@@ -1,13 +1,13 @@
 ﻿using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
 using PizzaRestaurant.Application.Common.AppErrors;
-using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUtils;
+using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils;
 using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
 using PizzaRestaurant.Presentation.Common.DTO;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
+namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
 {
     public class DeletePizzaEndpointTests
         : BaseApiIntegrationTests
@@ -21,19 +21,12 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
         public async Task DeletePizza_WithExistingId_ShouldDeletePizza()
         {
             //Arrange
-            var pizzaToAdd = _pizzaGenerator.Generate();
-            var addResult =
-                await _httpClient
-                    .PostAsJsonAsync("/pizza/add", pizzaToAdd);
-
-            var pizzaToDelete =
-                await addResult.Content
-                    .ReadFromJsonAsync<PizzaResponse>();
+            var pizzaToDelete = _pizzaGenerator.SeededPizzas[0];
 
             //Act
             var deleteResult =
                 await _httpClient
-                    .DeleteAsync($"/pizza/delete/{pizzaToDelete!.Id}");
+                    .DeleteAsync($"/pizza/delete/{pizzaToDelete.Id}");
 
             var getResult =
                 await _httpClient

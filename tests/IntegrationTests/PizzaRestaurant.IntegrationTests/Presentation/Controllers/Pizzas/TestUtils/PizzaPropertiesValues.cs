@@ -1,4 +1,4 @@
-﻿namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUtils
+﻿namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils
 {
     public static class PizzaPropertiesValues
     {

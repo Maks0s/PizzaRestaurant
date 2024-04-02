@@ -2,13 +2,13 @@
 using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
 using PizzaRestaurant.Application.Common.AppErrors;
-using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUtils;
+using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils;
 using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
 using PizzaRestaurant.Presentation.Common.DTO;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
+namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
 {
     public class GetAllPizzasEndpointTests
         : BaseApiIntegrationTests
@@ -23,16 +23,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
         public async Task GetAllPizzas_WithPopulatedDatabase_ShouldReturnAllPopulatedData()
         {
             //Arrange
-            var populateCount = new Random().Next(2, 4);
-
-            for (int i = 0; i < populateCount; i++)
-            {
-                await _httpClient
-                    .PostAsJsonAsync(
-                        "/pizza/add",
-                        _pizzaGenerator.Generate()
-                    );
-            }
+            var dbPopulateCount = _pizzaGenerator.SeededPizzas.Count;
 
             //Act
             var queryResult =
@@ -47,13 +38,14 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
             using var _ = new AssertionScope();
 
             queryResult.StatusCode.AssertStatusCode(HttpStatusCode.OK);
-            requestedPizzas!.Count.Should().Be(populateCount);
+            requestedPizzas!.Count.Should().Be(dbPopulateCount);
         }
 
         [Fact]
         public async Task GetAllPizzas_WithNotPopulatedDatabase_ShouldReturnInternalServerError()
         {
             //Arrange
+            await _asyncDbReseter.Invoke();
             var expectedError = Errors.ServerDataManipulation.NotReceived();
 
             //Act

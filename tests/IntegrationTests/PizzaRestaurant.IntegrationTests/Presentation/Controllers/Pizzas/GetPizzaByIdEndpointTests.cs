@@ -1,14 +1,13 @@
-﻿using FluentAssertions;
-using FluentAssertions.Execution;
+﻿using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
 using PizzaRestaurant.Application.Common.AppErrors;
-using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza.TestUtils;
+using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils;
 using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
 using PizzaRestaurant.Presentation.Common.DTO;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
+namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
 {
     public class GetPizzaByIdEndpointTests : BaseApiIntegrationTests
     {
@@ -23,20 +22,18 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
         public async Task GetPizzaById_WithexistingId_ShouldReturnExistingPizza()
         {
             //Arrange
-            var pizzaToAdd = _pizzaGenerator.Generate();
+            var pizzaToGet = _pizzaGenerator.SeededPizzas[0];
+            var pizzaRequestToAssert = new PizzaRequest(
+                    pizzaToGet.Name,
+                    pizzaToGet.CrustType,
+                    pizzaToGet.Ingredients,
+                    pizzaToGet.Price
+                );
             
-            var postResult =
-                await _httpClient
-                    .PostAsJsonAsync("/pizza/add", pizzaToAdd);
-
-            var addedPizza =
-                await postResult.Content
-                    .ReadFromJsonAsync<PizzaResponse>();
-
             //Act
             var getResult =
                 await _httpClient
-                    .GetAsync($"/pizza/{addedPizza!.Id}");
+                    .GetAsync($"/pizza/{pizzaToGet.Id}");
             var pizzaResponse =
                 await getResult.Content
                     .ReadFromJsonAsync<PizzaResponse>();
@@ -45,7 +42,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizza
             using var _ = new AssertionScope();
 
             getResult.StatusCode.AssertStatusCode(HttpStatusCode.OK);
-            pizzaResponse!.AssertPizzaResponse(pizzaToAdd);
+            pizzaResponse!.AssertPizzaResponse(pizzaRequestToAssert);
         }
 
         [Fact]
