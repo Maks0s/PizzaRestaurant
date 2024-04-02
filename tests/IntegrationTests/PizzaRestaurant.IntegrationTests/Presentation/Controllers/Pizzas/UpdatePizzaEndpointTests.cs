@@ -26,7 +26,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var updateResult =
                 await _httpClient
-                    .PutAsJsonAsync($"/pizza/update/{pizzaToUpdate.Id}", pizzaUpdateRequest);
+                    .PutAsJsonAsync(PizzaApiUrl.UpdatePizzaEndpoint + pizzaToUpdate.Id, pizzaUpdateRequest);
             var updatedPizza =
                 await updateResult.Content
                     .ReadFromJsonAsync<PizzaResponse>();
@@ -49,7 +49,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var updateResult =
                 await _httpClient
-                    .PutAsJsonAsync($"/pizza/update/{nonexistentId}", pizzaUpdateRequest);
+                    .PutAsJsonAsync(PizzaApiUrl.UpdatePizzaEndpoint + nonexistentId, pizzaUpdateRequest);
             var problemDetails =
                 await updateResult.Content
                     .ReadFromJsonAsync<ProblemDetails>();

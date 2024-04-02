@@ -25,7 +25,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var creationResult =
                 await _httpClient
-                    .PostAsJsonAsync("/pizza/add", pizzaToAdd);
+                    .PostAsJsonAsync(PizzaApiUrl.AddPizzaEndpoint, pizzaToAdd);
             var createdPizza =
                 await creationResult.Content
                     .ReadFromJsonAsync<PizzaResponse>();

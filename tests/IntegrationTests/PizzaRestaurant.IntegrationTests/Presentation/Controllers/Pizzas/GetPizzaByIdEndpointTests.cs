@@ -33,7 +33,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var getResult =
                 await _httpClient
-                    .GetAsync($"/pizza/{pizzaToGet.Id}");
+                    .GetAsync(PizzaApiUrl.GetPizzaByIdEndpoint + pizzaToGet.Id);
             var pizzaResponse =
                 await getResult.Content
                     .ReadFromJsonAsync<PizzaResponse>();
@@ -55,7 +55,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var getResult =
                 await _httpClient
-                    .GetAsync($"/pizza/{nonexistentId}");
+                    .GetAsync(PizzaApiUrl.GetPizzaByIdEndpoint + nonexistentId);
             var error =
                 await getResult.Content
                     .ReadFromJsonAsync<ProblemDetails>();

@@ -26,11 +26,11 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var deleteResult =
                 await _httpClient
-                    .DeleteAsync($"/pizza/delete/{pizzaToDelete.Id}");
+                    .DeleteAsync(PizzaApiUrl.DeletePizzaEndpoint + pizzaToDelete.Id);
 
             var getResult =
                 await _httpClient
-                    .GetAsync($"/pizza/{pizzaToDelete.Id}");
+                    .GetAsync(PizzaApiUrl.GetPizzaByIdEndpoint + pizzaToDelete.Id);
 
             //Assert
             using var _ = new AssertionScope();
@@ -49,7 +49,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var deleteResult =
                 await _httpClient
-                    .DeleteAsync($"/pizza/delete/{nonexistingId}");
+                    .DeleteAsync(PizzaApiUrl.DeletePizzaEndpoint + nonexistingId);
             var problemDetails =
                 await deleteResult.Content
                     .ReadFromJsonAsync<ProblemDetails>();

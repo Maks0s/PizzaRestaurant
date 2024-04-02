@@ -28,7 +28,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var queryResult =
                 await _httpClient
-                    .GetAsync("/pizza/all");
+                    .GetAsync(PizzaApiUrl.GetAllPizzasEndpoint);
 
             var requestedPizzas =
                 await queryResult.Content
@@ -51,7 +51,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var queryResult =
                 await _httpClient
-                    .GetAsync("/pizza/all");
+                    .GetAsync(PizzaApiUrl.GetAllPizzasEndpoint);
 
             var problemDetails =
                 await queryResult.Content
