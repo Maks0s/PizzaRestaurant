@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using PizzaRestaurant.Application.Common.Behaviors;
-using PizzaRestaurant.Application.Common.Interfaces;
+using System.Reflection;
 
 namespace PizzaRestaurant.Application
 {
@@ -15,7 +16,11 @@ namespace PizzaRestaurant.Application
                 cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
 
                 cfg.AddOpenBehavior(typeof(LoggingBehavior<,>));
+                cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
             });
+
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            ValidatorOptions.Global.LanguageManager.Enabled = false;
 
             return services;
         }

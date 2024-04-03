@@ -8,7 +8,8 @@ namespace PizzaRestaurant.Application.Pizzas.Commands.Update
             string CrustType,
             string Ingredients,
             decimal Price
-        ) : ICommand<Pizza?>
+        )
+        : ICommand<Pizza?>
     {
         public Guid PizzaId { get; set; }
     }
