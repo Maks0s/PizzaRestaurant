@@ -22,6 +22,14 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestU
                 .RuleFor(p => p.Ingredients, f => f.Lorem.Sentence())
                 .RuleFor(p => p.Price, f => f.Finance.Amount(10, 499, 2));
 
+        private readonly Faker<PizzaRequest> _invalidPizzaRequestGenerator =
+            new Faker<PizzaRequest>()
+                .WithRecord()
+                .RuleFor(p => p.Name, f => f.Random.AlphaNumeric(3))
+                .RuleFor(p => p.CrustType, f => f.Lorem.Paragraph(3))
+                .RuleFor(p => p.Ingredients, f => f.Lorem.Word())
+                .RuleFor(p => p.Price, f => f.Finance.Amount(-500, -10, 2));
+
         public List<Pizza> SeededPizzas;
 
         public PizzaGenerator(int pizzasCountToSeed)
@@ -32,6 +40,11 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestU
         public PizzaRequest GeneratePizzaRequest()
         {
             return _pizzaRequestGenerator.Generate();
+        }
+
+        public PizzaRequest GenerateInvalidPizzaRequest()
+        {
+            return _invalidPizzaRequestGenerator.Generate();
         }
     }
 }

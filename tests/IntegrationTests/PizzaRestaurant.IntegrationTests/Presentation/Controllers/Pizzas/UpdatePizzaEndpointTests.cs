@@ -26,7 +26,10 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var updateResult =
                 await _httpClient
-                    .PutAsJsonAsync(PizzaApiUrl.UpdatePizzaEndpoint + pizzaToUpdate.Id, pizzaUpdateRequest);
+                    .PutAsJsonAsync(
+                            PizzaApiUrl.UpdatePizzaEndpoint + pizzaToUpdate.Id,
+                            pizzaUpdateRequest
+                        );
             var updatedPizza =
                 await updateResult.Content
                     .ReadFromJsonAsync<PizzaResponse>();
@@ -49,7 +52,10 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             //Act
             var updateResult =
                 await _httpClient
-                    .PutAsJsonAsync(PizzaApiUrl.UpdatePizzaEndpoint + nonexistentId, pizzaUpdateRequest);
+                    .PutAsJsonAsync(
+                            PizzaApiUrl.UpdatePizzaEndpoint + nonexistentId,
+                            pizzaUpdateRequest
+                        );
             var problemDetails =
                 await updateResult.Content
                     .ReadFromJsonAsync<ProblemDetails>();
@@ -59,6 +65,29 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
 
             updateResult.StatusCode.AssertStatusCode(HttpStatusCode.NotFound);
             problemDetails!.AssertError(expectedError);
+        }
+
+        [Fact]
+        public async Task UpdatePizza_WithInvalidDataAndExistingId_ShouldReturnBadRequest()
+        {
+            //Arrange
+            var invalidPizzaRequest =
+                _pizzaGenerator.GenerateInvalidPizzaRequest();
+            var pizzaToUpdate =
+                _pizzaGenerator.SeededPizzas[0];
+
+            //Act
+            var updateResult =
+                await _httpClient
+                    .PutAsJsonAsync(
+                            PizzaApiUrl.UpdatePizzaEndpoint + pizzaToUpdate.Id,
+                            invalidPizzaRequest
+                        );
+
+            //Assert
+            using var _ = new AssertionScope();
+
+            updateResult.StatusCode.AssertStatusCode(HttpStatusCode.BadRequest);
         }
     }
 }

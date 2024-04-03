@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Execution;
+using Microsoft.AspNetCore.Mvc;
 using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils;
 using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
 using PizzaRestaurant.Presentation.Common.DTO;
@@ -36,6 +37,26 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
             creationResult.StatusCode.AssertStatusCode(HttpStatusCode.Created);
             creationResult.Headers.Location.Should().Be($"http://localhost/pizza/{createdPizza!.Id}");
             createdPizza.AssertPizzaResponse(pizzaToAdd);
+        }
+
+        [Fact]
+        public async Task AddPizza_WithInvalidData_ShouldReturnValidationError()
+        {
+            //Arrange
+            var invalidPizzaRequest =
+                _pizzaGenerator.GenerateInvalidPizzaRequest();
+
+            //Act
+            var creationResult =
+                await _httpClient
+                    .PostAsJsonAsync(
+                        PizzaApiUrl.AddPizzaEndpoint,
+                        invalidPizzaRequest
+                    );
+            //Assert
+            using var _ = new AssertionScope();
+
+            creationResult.StatusCode.AssertStatusCode(HttpStatusCode.BadRequest);
         }
     }
 }
