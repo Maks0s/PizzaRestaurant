@@ -24,6 +24,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaRestaurant.Integration
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "IntegrationTests", "{A2E39E8A-9C96-4A03-9174-A3517462AD1E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{87004175-7726-4B90-9B32-AFD72DE08BB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaRestaurant.Infrastructure.UnitTests", "tests\UnitTests\PizzaRestaurant.Infrastructure.UnitTests\PizzaRestaurant.Infrastructure.UnitTests.csproj", "{1FF32414-8919-4C51-9D56-9B0B92739EB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +54,10 @@ Global
 		{8D4EA3EC-C73A-4B66-8067-3FDD14017494}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D4EA3EC-C73A-4B66-8067-3FDD14017494}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D4EA3EC-C73A-4B66-8067-3FDD14017494}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF32414-8919-4C51-9D56-9B0B92739EB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF32414-8919-4C51-9D56-9B0B92739EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF32414-8919-4C51-9D56-9B0B92739EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF32414-8919-4C51-9D56-9B0B92739EB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +69,8 @@ Global
 		{ADB0AFC3-94E5-4FC2-A528-FBF55D4DE02E} = {308A9BD9-1881-4BE9-A07E-0BF8E1BF776F}
 		{8D4EA3EC-C73A-4B66-8067-3FDD14017494} = {A2E39E8A-9C96-4A03-9174-A3517462AD1E}
 		{A2E39E8A-9C96-4A03-9174-A3517462AD1E} = {6F5D3B9E-AFDF-4A69-85D6-D940FA717D93}
+		{87004175-7726-4B90-9B32-AFD72DE08BB4} = {6F5D3B9E-AFDF-4A69-85D6-D940FA717D93}
+		{1FF32414-8919-4C51-9D56-9B0B92739EB4} = {87004175-7726-4B90-9B32-AFD72DE08BB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2F220E76-B178-4732-BA04-DC74DE838C1B}

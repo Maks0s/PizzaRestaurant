@@ -26,6 +26,7 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.TestUtils
         private Respawner _respawner = default!;
 
         public HttpClient HttpClient { get; private set; } = default!;
+
         public readonly PizzaGenerator PizzaGenerator = new PizzaGenerator(3);
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -82,7 +83,6 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.TestUtils
             HttpClient = CreateClient();
             await InitializeRespawnerAsync();
         }
-
 
         private async Task InitializeRespawnerAsync()
         {
