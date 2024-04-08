@@ -1,6 +1,6 @@
 ﻿namespace PizzaRestaurant.Infrastructure.UnitTests.Authentication.TestUtils
 {
-    public record AuthUserDto(
+    public record UserDataDto(
             string UserId,
             string Username,
             string Email

@@ -10,7 +10,7 @@ namespace PizzaRestaurant.Infrastructure.UnitTests.Authentication.Jwt.TestUtils
     {
         public static void AssertUserClaims(
                 this JwtSecurityToken jwt,
-                AuthUserDto authUser
+                UserDataDto authUser
             )
         {
             using var _ = new AssertionScope();

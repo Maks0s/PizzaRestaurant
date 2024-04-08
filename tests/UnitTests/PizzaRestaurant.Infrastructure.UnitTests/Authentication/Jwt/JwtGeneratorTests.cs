@@ -12,7 +12,7 @@ using System.Text;
 
 namespace PizzaRestaurant.Infrastructure.UnitTests.Authentication.Jwt
 {
-    public class JwtGeneratorTests : IClassFixture<AuthUserGenerator>
+    public class JwtGeneratorTests : IClassFixture<UserDataGenerator>
     {
         private readonly IOptions<JwtConfig> _mockJwtConfigOptions;
         private readonly ILogger<JwtGenerator> _mockLogger;
@@ -22,9 +22,9 @@ namespace PizzaRestaurant.Infrastructure.UnitTests.Authentication.Jwt
 
         private readonly JwtGenerator _jwtGenerator;
         
-        private readonly AuthUserGenerator _authUserGenerator;
+        private readonly UserDataGenerator _authUserGenerator;
 
-        public JwtGeneratorTests(AuthUserGenerator authUserGenerator)
+        public JwtGeneratorTests(UserDataGenerator authUserGenerator)
         {
             _mockJwtConfigOptions = Substitute.For<IOptions<JwtConfig>>();
             _mockJwtConfigOptions.Value
