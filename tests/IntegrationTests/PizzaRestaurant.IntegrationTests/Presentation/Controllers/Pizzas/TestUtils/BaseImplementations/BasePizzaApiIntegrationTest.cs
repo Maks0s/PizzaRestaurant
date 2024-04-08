@@ -1,5 +1,4 @@
-﻿using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Auth.TestUtils;
-using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.Helpers;
+﻿using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.Helpers;
 using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
 
 namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.BaseImplementations
