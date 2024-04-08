@@ -1,4 +1,4 @@
-﻿namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils
+﻿namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.Helpers
 {
     public static class PizzaApiUrl
     {

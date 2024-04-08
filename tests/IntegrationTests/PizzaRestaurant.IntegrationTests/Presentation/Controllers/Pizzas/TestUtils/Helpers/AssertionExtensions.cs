@@ -2,10 +2,10 @@
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
-using PizzaRestaurant.Presentation.Common.DTO;
+using PizzaRestaurant.Presentation.Common.DTO.PizzaDto;
 using System.Net;
 
-namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils
+namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.Helpers
 {
     public static class AssertionExtensions
     {

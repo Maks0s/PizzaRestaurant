@@ -1,18 +1,19 @@
 ﻿using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
 using PizzaRestaurant.Application.Common.AppErrors;
-using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils;
-using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
-using PizzaRestaurant.Presentation.Common.DTO;
+using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.BaseImplementations;
+using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.Helpers;
+using PizzaRestaurant.Presentation.Common.DTO.PizzaDto;
 using System.Net;
 using System.Net.Http.Json;
 
 namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
 {
-    public class GetPizzaByIdEndpointTests : BaseApiIntegrationTests
+    public class GetPizzaByIdEndpointTests
+        : BasePizzaApiIntegrationTest
     {
         public GetPizzaByIdEndpointTests(
-                ApiFactory apiFactory
+                PizzaApiFactory apiFactory
             )
             : base(apiFactory)
         {

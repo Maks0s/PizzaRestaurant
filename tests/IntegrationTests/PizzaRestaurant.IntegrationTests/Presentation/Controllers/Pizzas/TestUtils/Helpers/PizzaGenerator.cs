@@ -1,9 +1,9 @@
 ﻿using Bogus;
 using PizzaRestaurant.Domain.Entities;
 using PizzaRestaurant.IntegrationTests.TestUtils;
-using PizzaRestaurant.Presentation.Common.DTO;
+using PizzaRestaurant.Presentation.Common.DTO.PizzaDto;
 
-namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils
+namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.Helpers
 {
     public class PizzaGenerator
     {

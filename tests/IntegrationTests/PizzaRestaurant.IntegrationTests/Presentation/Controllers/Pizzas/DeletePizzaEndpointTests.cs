@@ -1,18 +1,17 @@
 ﻿using FluentAssertions.Execution;
 using Microsoft.AspNetCore.Mvc;
 using PizzaRestaurant.Application.Common.AppErrors;
-using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils;
-using PizzaRestaurant.IntegrationTests.Presentation.TestUtils;
-using PizzaRestaurant.Presentation.Common.DTO;
+using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.BaseImplementations;
+using PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestUtils.Helpers;
 using System.Net;
 using System.Net.Http.Json;
 
 namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas
 {
     public class DeletePizzaEndpointTests
-        : BaseApiIntegrationTests
+        : BasePizzaApiIntegrationTest
     {
-        public DeletePizzaEndpointTests(ApiFactory apiFactory)
+        public DeletePizzaEndpointTests(PizzaApiFactory apiFactory)
             : base(apiFactory)
         {
         }
