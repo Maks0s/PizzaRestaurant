@@ -1,7 +1,6 @@
-﻿namespace PizzaRestaurant.Presentation.Common.DTO
+﻿namespace PizzaRestaurant.Presentation.Common.DTO.PizzaDto
 {
-    public record PizzaResponse(
-            Guid Id,
+    public record PizzaRequest(
             string Name,
             string CrustType,
             string Ingredients,

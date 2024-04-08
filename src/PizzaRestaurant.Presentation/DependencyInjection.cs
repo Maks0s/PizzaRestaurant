@@ -19,6 +19,7 @@ namespace PizzaRestaurant.Presentation
         private static IServiceCollection AddMappers(this IServiceCollection services)
         {
             services.AddTransient<PizzaMapper>();
+            services.AddTransient<AuthMapper>();
 
             return services;
         }
