@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PizzaRestaurant.Application.Auth.Common.AuthDto;
 using PizzaRestaurant.Presentation.Common.DTO.AuthDto;
 using PizzaRestaurant.Presentation.Common.Mappers;
 using PizzaRestaurant.Presentation.Controllers.Common;
@@ -40,6 +41,24 @@ namespace PizzaRestaurant.Presentation.Controllers.Auth
                     errors => Problem(errors)
                 );
 
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<ActionResult<AuthResponse>> Login([FromBody] AuthRequest loginRequest)
+        {
+            var query = _mapper
+                .MapToLoginQuery(loginRequest);
+
+            var loginResult =
+                await _mediator.Send(query);
+
+            return loginResult.Match(
+                    logged => Ok( 
+                            _mapper.MapToAuthResponse(logged)
+                        ),
+                    errors => Problem(errors)
+                );
         }
     }
 }
