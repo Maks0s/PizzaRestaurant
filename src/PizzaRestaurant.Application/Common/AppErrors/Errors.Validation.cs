@@ -10,11 +10,12 @@ namespace PizzaRestaurant.Application.Common.AppErrors
             public static Error ValidationError(
                     string invalidProperty,
                     string errorMessage
-                ) => Error.Custom(
-                                (int)HttpStatusCode.BadRequest,
-                                "Validation not passed",
-                                $"{invalidProperty}-{errorMessage}"
-                            );
+                ) => 
+                    Error.Custom(
+                        (int)HttpStatusCode.BadRequest,
+                        "Validation failure",
+                        $"{invalidProperty}-{errorMessage}"
+                    );
         }
     }
 }

@@ -13,6 +13,13 @@ namespace PizzaRestaurant.Application.Common.AppErrors
                         "User already registered",
                         $"User with email: {email} already exists"
                     );
+
+            public static Error InvalidCredentials() =>
+                Error.Custom(
+                        (int)HttpStatusCode.Unauthorized,
+                        "Invalid credentials",
+                        "Email or password is incorrect"
+                    );
         }
     }
 }
