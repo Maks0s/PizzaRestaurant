@@ -6,7 +6,6 @@ using PizzaRestaurant.Application.Pizzas.Queries.GetById;
 using PizzaRestaurant.Presentation.Common.DTO.PizzaDto;
 using PizzaRestaurant.Presentation.Common.Mappers;
 using PizzaRestaurant.Presentation.Controllers.Common;
-using System.Text.Json.Serialization;
 
 namespace PizzaRestaurant.Presentation.Controllers.Pizza
 {

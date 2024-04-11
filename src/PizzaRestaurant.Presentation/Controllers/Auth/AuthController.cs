@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using PizzaRestaurant.Application.Auth.Common.AuthDto;
 using PizzaRestaurant.Presentation.Common.DTO.AuthDto;
 using PizzaRestaurant.Presentation.Common.Mappers;
 using PizzaRestaurant.Presentation.Controllers.Common;

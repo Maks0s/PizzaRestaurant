@@ -2,10 +2,33 @@ version: '3.9'
 
 volumes:
   PizzaRestourantMsSqlDbStorage:
+
+networks:
+  my-network:
+    driver: bridge
   
 services:
+  Api:
+    container_name: "PizzaRestourant.Api"
+    image: maks0s/pizza_restaurant:1.1.0
+    build:
+      context: .
+    env_file:
+      - apiconfig.env
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+      - $APPDATA/Microsoft/UserSecrets/$USER_SECRETS_ID:/root/.microsoft/usersecrets/$USER_SECRETS_ID
+    networks:
+      - my-network
+    depends_on:
+      - MsSqlServer
+
+
   MsSqlServer:
-    container_name: "PizzaRestourantMsSqlDb"
+    container_name: "PizzaRestourant.MsSqlDb"
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     env_file:
       - sqlconfig.env
@@ -14,3 +37,5 @@ services:
       - "1439:1433"
     volumes:
       - PizzaRestourantMsSqlDbStorage:/var/opt/mssql/
+    networks:
+      - my-network
