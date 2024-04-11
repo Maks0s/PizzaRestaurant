@@ -24,8 +24,7 @@ namespace PizzaRestaurant.Application.Pizzas.Queries.GetById
             var pizzaId = query.Id;
 
             var pizza =
-                await _pizzaRepository
-                    .GetPizzaAsync(pizzaId);
+                await _pizzaRepository.GetPizzaAsync(pizzaId);
 
             if (pizza is null)
             {

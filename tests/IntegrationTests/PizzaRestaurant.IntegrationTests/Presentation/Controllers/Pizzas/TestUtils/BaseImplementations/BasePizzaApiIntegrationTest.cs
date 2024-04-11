@@ -7,9 +7,9 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.Controllers.Pizzas.TestU
     public class BasePizzaApiIntegrationTest
         : BaseApiIntegrationTest
     {
-        private readonly Func<Task> _asyncDbReseeder;
-
         protected PizzaGenerator _pizzaGenerator;
+
+        private readonly Func<Task> _asyncDbReseeder;
 
         public BasePizzaApiIntegrationTest(
                 PizzaApiFactory apiFactory

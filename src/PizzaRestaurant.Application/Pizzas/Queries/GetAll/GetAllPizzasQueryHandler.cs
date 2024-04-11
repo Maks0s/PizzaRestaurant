@@ -22,8 +22,7 @@ namespace PizzaRestaurant.Application.Pizzas.Queries.GetAll
             )
         {
             var allPizzas =
-                await _pizzaRepository.
-                    GetAllPizzasAsync();
+                await _pizzaRepository.GetAllPizzasAsync();
 
             if(allPizzas.Count <= 0)
             {

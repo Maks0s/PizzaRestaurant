@@ -18,13 +18,13 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.TestUtils
         : WebApplicationFactory<IApiMarker>,
         IAsyncLifetime
     {
+        public HttpClient HttpClient { get; private set; } = default!;
+
         private readonly MsSqlContainer _msSqlContainer =
             new MsSqlBuilder().Build();
 
-        private DbConnection _connection = default!;
         protected Respawner _respawner = default!;
-
-        public HttpClient HttpClient { get; private set; } = default!;
+        private DbConnection _connection = default!;
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -66,11 +66,6 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.TestUtils
             });
         }
 
-        public async Task ResetDbAsync()
-        {
-            await _respawner.ResetAsync(_msSqlContainer.GetConnectionString());
-        }
-
         public async Task InitializeAsync()
         {
             await _msSqlContainer.StartAsync();
@@ -101,6 +96,11 @@ namespace PizzaRestaurant.IntegrationTests.Presentation.TestUtils
         public new async Task DisposeAsync()
         {
             await _msSqlContainer.StopAsync();
+        }
+
+        public async Task ResetDbAsync()
+        {
+            await _respawner.ResetAsync(_msSqlContainer.GetConnectionString());
         }
     }
 }

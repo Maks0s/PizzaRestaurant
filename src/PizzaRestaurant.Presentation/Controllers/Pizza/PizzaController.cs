@@ -50,7 +50,9 @@ namespace PizzaRestaurant.Presentation.Controllers.Pizza
                 await _mediator.Send(query);
 
             return queryResult.Match<ActionResult<PizzaResponse>>(
-                    received => _mapper.MapToPizzaResponse(received),
+                    received => Ok(
+                            _mapper.MapToPizzaResponse(received)
+                        ),
                     errors => Problem(errors)
                 );
         }

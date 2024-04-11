@@ -10,7 +10,7 @@ networks:
 services:
   Api:
     container_name: "PizzaRestourant.Api"
-    image: maks0s/pizza_restaurant:1.1.0
+    image: maks0s/pizza_restaurant:1.2.0
     build:
       context: .
     env_file:
