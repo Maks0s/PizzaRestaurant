@@ -12,10 +12,10 @@ COPY ["src/PizzaRestaurant.Presentation/PizzaRestaurant.Presentation.csproj", "P
 RUN dotnet restore "PizzaRestaurant.Presentation/PizzaRestaurant.Presentation.csproj"
 COPY . .
 WORKDIR "src/PizzaRestaurant.Presentation"
-RUN dotnet build "PizzaRestaurant.Presentation.csproj"  -c Realese -o /app/build
+RUN dotnet build "PizzaRestaurant.Presentation.csproj"  -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "PizzaRestaurant.Presentation.csproj" -c Realese -o /app/publish
+RUN dotnet publish "PizzaRestaurant.Presentation.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
