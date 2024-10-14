@@ -28,10 +28,15 @@ namespace PizzaRestaurant.Presentation
         {
             using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-            using PizzaDbContext dbContext =
+            using PizzaDbContext pizzaDbContext =
                 scope.ServiceProvider.GetRequiredService<PizzaDbContext>();
 
-            dbContext.Database.Migrate();
+            pizzaDbContext.Database.Migrate();
+
+            using AuthDbContext authDbContext =
+                scope.ServiceProvider.GetRequiredService<AuthDbContext>();
+
+            authDbContext.Database.Migrate();
         }
     }
 }
