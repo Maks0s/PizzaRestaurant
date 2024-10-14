@@ -6,8 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{308A9BD9-1881-4BE9-A07E-0BF8E1BF776F}"
 	ProjectSection(SolutionItems) = preProject
 		apiconfig.env = apiconfig.env
+		Docker-compose.development.yaml = Docker-compose.development.yaml
 		Docker-compose.yaml = Docker-compose.yaml
-		Dockerfile = Dockerfile
+		src\Dockerfile = src\Dockerfile
 		sapassword.env = sapassword.env
 		sqlconfig.env = sqlconfig.env
 	EndProjectSection
@@ -28,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTests", "Integra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{87004175-7726-4B90-9B32-AFD72DE08BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaRestaurant.Infrastructure.UnitTests", "tests\UnitTests\PizzaRestaurant.Infrastructure.UnitTests\PizzaRestaurant.Infrastructure.UnitTests.csproj", "{1FF32414-8919-4C51-9D56-9B0B92739EB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PizzaRestaurant.Infrastructure.UnitTests", "tests\UnitTests\PizzaRestaurant.Infrastructure.UnitTests\PizzaRestaurant.Infrastructure.UnitTests.csproj", "{1FF32414-8919-4C51-9D56-9B0B92739EB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
