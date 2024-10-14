@@ -8,25 +8,6 @@ networks:
     driver: bridge
   
 services:
-  api:
-    container_name: "PizzaRestourant.Api"
-    image: maks0s/pizza_restaurant:2.0.1
-    build:
-      context: .
-      dockerfile: src/Dockerfile
-    env_file:
-      - apiconfig.env
-    ports:
-      - "5000:8080"
-      - "5001:8081"
-    volumes:
-      - ~/.aspnet/https:/https:ro
-    networks:
-      - my-network
-    depends_on:
-      - pizza-restourant-sqlserver
-
-
   pizza-restourant-sqlserver:
     container_name: "PizzaRestourant.MsSqlDb"
     image: "mcr.microsoft.com/mssql/server:2022-latest"
